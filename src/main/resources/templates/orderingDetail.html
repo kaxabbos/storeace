@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>STOREACE - Детали заказа</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 accent"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-11">
+                        <h3 class="text-dark mb-4">Детали заказа</h3>
+                    </div>
+                    <div class="col-1">
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <a href="javascript:history.back()" class="btn btn-outline-primary" type="submit">Назад</a>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-success" role="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="idFioClient">
+                            <strong>Клиент</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="date">
+                            <strong>Дата</strong>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input th:value="${ordering.client.fio}" class="form-control" type="text" id="idFioClient"
+                               readonly>
+                    </div>
+                    <div class="col">
+                        <input th:value="${ordering.date}" class="form-control" type="date" id="date" readonly>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="product">
+                            <strong>Наименование, ИД, имеющееся количество и цена за единицу продукта</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
+                </div>
+                <div class="row mb-5px">
+                    <div class="col">
+                        <form th:action="'/ordering/' + ${ordering.id} + '/orderingDetail/add'" method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <select class="form-select" id="product" name="idProduct"
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
+                                        <option th:each="product : ${products}" th:value="${product.id}"
+                                                th:label="${product.name} + ' - ' + ${product.id} + ' - ' + ${product.quantity}+ ' - ' + ${product.unitPrice}"></option>
+                                    </select>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px">
+                                    <button class="btn btn-outline-primary" type="submit">Добавить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Наименование и ИД продукта</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Имеющееся количество</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Выбранное количество</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Стоимость за единицу</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Стоимость текущего продукта</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px"></div>
+                </div>
+                <div th:each="orderingDetail : ${orderingDetails}" class="row mb-5px">
+                    <div class="col">
+                        <form th:action="'/ordering/' + ${ordering.id} + '/orderingDetail/' + ${orderingDetail.id} + '/edit'"
+                              method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <select class="form-select" name="idProduct"
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
+                                        <option th:each="product : ${products}" th:value="${product.id}"
+                                                th:label="${product.name} + ' - ' + ${product.id}"
+                                                th:selected="${product.id == orderingDetail.product.id}"></option>
+                                    </select>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                                    <input th:value="${orderingDetail.product.quantity}" class="form-control" type="number"
+                                           readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                                    <input th:value="${orderingDetail.quantity}" class="form-control" type="number"
+                                           min="0" th:max="${orderingDetail.product.quantity}" name="quantity" required>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                                    <input th:value="${orderingDetail.product.unitPrice}" class="form-control" type="number"
+                                           readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                                    <input th:value="${orderingDetail.price}" class="form-control" type="number"
+                                           readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px">
+                                    <button class="btn btn-outline-primary" type="submit">Изменить</button>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px">
+                                    <a th:href="'/ordering/' + ${ordering.id} + '/orderingDetail/' + ${orderingDetail.id} + '/delete'"
+                                       class="btn btn-outline-danger" type="submit">Убрать</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-5px" style="color: rgb(0, 0, 0);">
+                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
+                        <span>Суммарное количество:&nbsp;</span>
+                        <span th:text="${ordering.fullQuantity}"></span>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
+                        <span>Суммарная стоимость:&nbsp;</span>
+                        <span th:text="${ordering.fullPrice}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

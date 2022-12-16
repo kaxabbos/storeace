@@ -1,0 +1,106 @@
+<nav th:fragment="nav">
+    <div class="container-fluid d-flex flex-column p-0">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+           href="/index">
+            <div class="sidebar-brand-icon"><img src="/img/ico.png" alt="STOREACE"></div>
+            <div class="sidebar-brand-text mx-3"><span>STOREACE</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/ordering">
+                    <i class="far fa-plus-square icons"></i><span>Оформление заказа</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/waiting">
+                    <i class="far fa-clock icons"></i><span>Ожидание</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/payment">
+                    <i class="far fa-money-bill-alt icons"></i><span>Оплата</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/shipment">
+                    <i class="fas fa-truck-loading icons"></i><span>В отгрузке</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/shipped">
+                    <i class="fas fa-shipping-fast icons"></i><span>Отгружено</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/product">
+                    <i class="fas fa-table icons"></i><span>Товары</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'MANAGER'}" class="nav-item">
+                <a class="nav-link" href="/client">
+                    <i class="fas fa-table icons"></i><span>Клиенты</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/stat">
+                    <i class="far fa-list-alt icons"></i><span>Статистика</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/statProduct">
+                    <i class="far fa-list-alt icons"></i><span>Товары</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/statOrdering">
+                    <i class="far fa-list-alt icons"></i><span>Заказы</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/statCycle">
+                    <i class="far fa-list-alt icons"></i><span>Циклы</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() != 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/index">
+                    <i class="far fa-user icons"></i><span>Профиль</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/userAll">
+                    <i class="fas fa-users icons"></i><span>Пользователи</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'ADMIN'}" class="nav-item">
+                <a class="nav-link" href="/userAdd">
+                    <i class="fas fa-plus icons"></i><span>Добавить сотрудника</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/login">
+                    <i class="icon-login icons"></i><span>Вход</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() == 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/reg">
+                    <i class="fas fa-user-plus icons"></i><span>Регистрация</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">
+                    <i class="far fa-star icons"></i><span>О нас</span>
+                </a>
+            </li>
+            <li th:if="${user.role.name() != 'NOT'}" class="nav-item">
+                <form class="nav-link" action="/logout" method="post">
+                    <i class="icon-logout icons"></i>
+                    <button class="btn button-logout" type="submit">Выход</button>
+                </form>
+            </li>
+        </ul>
+        <div class="text-center d-none d-md-inline">
+            <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+        </div>
+    </div>
+</nav>
