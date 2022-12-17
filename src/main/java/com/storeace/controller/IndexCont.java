@@ -1,7 +1,7 @@
 package com.storeace.controller;
 
 import com.storeace.controller.main.Attributes;
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +33,7 @@ public class IndexCont extends Attributes {
 
     @PostMapping("/user/edit")
     public String userEdit(Model model, @RequestParam String fio, @RequestParam String passwordOld, @RequestParam String password, @RequestParam String passwordRepeat) {
-        User user = getUser();
+        Users user = getUser();
 
         if (!passwordOld.equals(user.getPassword())) {
             model.addAttribute("message", "Некорректный ввод текущего пароля");
@@ -76,7 +76,7 @@ public class IndexCont extends Attributes {
                 AddAttributesIndex(model);
                 return "index";
             }
-            User user = getUser();
+            Users user = getUser();
             if (!user.getAvatar().equals(defaultAvatar)) {
                 try {
                     Files.delete(Paths.get(uploadImg + "/" + user.getAvatar()));

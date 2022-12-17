@@ -30,17 +30,21 @@ public class OrderingCont extends Attributes {
     @PostMapping("/add")
     public String OrderAdd(Model model, @RequestParam Long clientId, @RequestParam String date) {
         Client client = clientService.find(clientId);
-        Ordering orderingCheck = orderingService.findByClientAndDateAndOrderingStatus(client, date, OrderingStatus.NOT_RESERVED);
-        if (orderingCheck != null) {
-            AddAttributesOrdering(model);
-            model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в оформлении");
-            return "ordering";
-        }
-        orderingCheck = orderingService.findByClientAndDateAndOrderingStatus(client, date, OrderingStatus.WAITING);
-        if (orderingCheck != null) {
-            AddAttributesOrdering(model);
-            model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в ожидании");
-            return "ordering";
+
+        List<Ordering> orderingList = client.getOrderings();
+        for (Ordering i : orderingList) {
+            if (i.getDate().equals(date)) {
+                if (i.getOrderingStatus() == OrderingStatus.NOT_RESERVED) {
+                    AddAttributesOrdering(model);
+                    model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в оформлении");
+                    return "ordering";
+                }
+                if (i.getOrderingStatus() == OrderingStatus.WAITING) {
+                    AddAttributesOrdering(model);
+                    model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в ожидании");
+                    return "ordering";
+                }
+            }
         }
 
         Ordering ordering = orderingService.addAndFlush(new Ordering(date));
@@ -101,9 +105,13 @@ public class OrderingCont extends Attributes {
         List<Ordering> orderingList = client.getOrderings();
         for (Ordering i : orderingList) {
             if (i.getId().equals(idOrdering)) continue;
-            if (i.getDate().equals(date) && i.getOrderingStatus() == OrderingStatus.NOT_RESERVED) {
+            if (i.getDate().equals(date) && (i.getOrderingStatus() == OrderingStatus.NOT_RESERVED || i.getOrderingStatus() == OrderingStatus.WAITING)) {
                 AddAttributesOrdering(model);
-                model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в оформлении");
+                if (i.getOrderingStatus() == OrderingStatus.NOT_RESERVED) {
+                    model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в оформлении");
+                } else {
+                    model.addAttribute("message", "Заказ для клиента \"" + client.getFio() + "\" с датой \"" + date + "\" в ожидании");
+                }
                 return "ordering";
             }
         }

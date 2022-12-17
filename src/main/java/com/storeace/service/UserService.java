@@ -1,6 +1,6 @@
 package com.storeace.service;
 
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import com.storeace.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,35 +25,35 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public void add(User user) {
-        userRepo.save(user);
+    public void add(Users users) {
+        userRepo.save(users);
     }
 
-    public void update(User user) {
-        userRepo.save(user);
+    public void update(Users users) {
+        userRepo.save(users);
     }
 
     public void delete(Long id) {
         userRepo.deleteById(id);
     }
 
-    public void delete(User user) {
-        userRepo.delete(user);
+    public void delete(Users users) {
+        userRepo.delete(users);
     }
 
-    public User find(Long id) {
+    public Users find(Long id) {
         return userRepo.findUserById(id);
     }
 
-    public List<User> findAllByOrderByRole() {
+    public List<Users> findAllByOrderByRole() {
         return userRepo.findAllByOrderByRole();
     }
 
-    public User findByUsername(String username) {
+    public Users findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
 
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userRepo.findAll();
     }
 }

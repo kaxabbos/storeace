@@ -3,7 +3,7 @@ package com.storeace.controller.main;
 import com.storeace.model.Ordering;
 import com.storeace.model.OrderingDetail;
 import com.storeace.model.Product;
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import com.storeace.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class Main {
 
     protected String defaultAvatar = "def.jpeg";
 
-    protected User getUser() {
+    protected Users getUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
