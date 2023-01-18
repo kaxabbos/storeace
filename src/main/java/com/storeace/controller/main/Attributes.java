@@ -15,6 +15,7 @@ import java.util.List;
 public class Attributes extends Main {
 
     protected void AddAttributes(Model model) {
+        model.addAttribute("role", getRole());
         model.addAttribute("user", getUser());
     }
 

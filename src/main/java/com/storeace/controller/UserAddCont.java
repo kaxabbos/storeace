@@ -1,7 +1,7 @@
 package com.storeace.controller;
 
 import com.storeace.controller.main.Attributes;
-import com.storeace.model.Users;
+import com.storeace.model.User;
 import com.storeace.model.enums.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,7 @@ public class UserAddCont extends Attributes {
             AddAttributesAddUser(model);
             return "userAdd";
         }
-        userService.add(new Users(username, password, fio, role, defaultAvatar));
+        userService.add(new User(username, password, fio, role, defaultAvatar));
         return "redirect:/userAdd";
     }
 }

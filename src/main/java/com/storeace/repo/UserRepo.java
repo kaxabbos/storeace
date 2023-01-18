@@ -1,17 +1,17 @@
 package com.storeace.repo;
 
-import com.storeace.model.Users;
+import com.storeace.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface UserRepo extends JpaRepository<Users, Long> {
-    Users findByUsername(String username);
+public interface UserRepo extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 
-    List<Users> findAllByOrderByRole();
+    List<User> findAllByOrderByRole();
 
-    Users findUserById(Long id);
+    User findUserById(Long id);
 
 }

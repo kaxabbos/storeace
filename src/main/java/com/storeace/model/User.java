@@ -18,7 +18,7 @@ import java.util.Collections;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Users implements UserDetails {
+public class User implements UserDetails {
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class Users implements UserDetails {
     private String fio;
     private String avatar;
 
-    public Users(String username, String password, String fio, Role role, String avatar) {
+    public User(String username, String password, String fio, Role role, String avatar) {
         this.role = role;
         this.username = username;
         this.password = passwordEncoder().encode(password);

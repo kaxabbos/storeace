@@ -35,7 +35,7 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
                 </div>
-                <div th:each="user : ${users}" class="row mb-10px">
+                <div th:each="user : ${user}" class="row mb-10px">
                     <div class="col">
                         <form th:action="'/userAll/' + ${user.id} + '/edit'" method="post">
                             <div class="row">
