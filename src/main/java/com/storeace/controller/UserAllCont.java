@@ -1,7 +1,7 @@
 package com.storeace.controller;
 
 import com.storeace.controller.main.Attributes;
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import com.storeace.model.enums.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +19,9 @@ public class UserAllCont extends Attributes {
 
     @PostMapping("/{id}/edit")
     public String ProfilesEdit(@PathVariable long id, @RequestParam Role role) {
-        User user = userService.find(id);
+        Users user = usersService.find(id);
         user.setRole(role);
-        userService.update(user);
+        usersService.update(user);
         return "redirect:/userAll";
     }
 
@@ -33,7 +33,7 @@ public class UserAllCont extends Attributes {
             return "userAll";
         }
 
-        userService.delete(id);
+        usersService.delete(id);
 
         return "redirect:/userAll";
     }

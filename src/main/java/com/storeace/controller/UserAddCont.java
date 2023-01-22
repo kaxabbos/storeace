@@ -1,7 +1,7 @@
 package com.storeace.controller;
 
 import com.storeace.controller.main.Attributes;
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import com.storeace.model.enums.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +22,12 @@ public class UserAddCont extends Attributes {
 
     @PostMapping("/add")
     public String AddNewUser(Model model, @RequestParam String username, @RequestParam String password, @RequestParam String fio, @RequestParam Role role) {
-        if (userService.findByUsername(username) != null) {
+        if (usersService.findByUsername(username) != null) {
             model.addAttribute("message", "Пользователь с таким логином уже существует");
             AddAttributesAddUser(model);
             return "userAdd";
         }
-        userService.add(new User(username, password, fio, role, defaultAvatar));
+        usersService.add(new Users(username, password, fio, role, defaultAvatar));
         return "redirect:/userAdd";
     }
 }

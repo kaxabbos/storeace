@@ -64,12 +64,12 @@
             </li>
             <li th:if="${role != 'NOT'}" class="nav-item">
                 <a class="nav-link" href="/index">
-                    <i class="far fa-user icons"></i><span>Профиль</span>
+                    <i class="far fa-users icons"></i><span>Профиль</span>
                 </a>
             </li>
             <li th:if="${role == 'ADMIN'}" class="nav-item">
                 <a class="nav-link" href="/userAll">
-                    <i class="fas fa-user icons"></i><span>Пользователи</span>
+                    <i class="fas fa-users icons"></i><span>Пользователи</span>
                 </a>
             </li>
             <li th:if="${role == 'ADMIN'}" class="nav-item">
@@ -84,7 +84,7 @@
             </li>
             <li th:if="${role == 'NOT'}" class="nav-item">
                 <a class="nav-link" href="/reg">
-                    <i class="fas fa-user-plus icons"></i><span>Регистрация</span>
+                    <i class="fas fa-users-plus icons"></i><span>Регистрация</span>
                 </a>
             </li>
             <li class="nav-item">

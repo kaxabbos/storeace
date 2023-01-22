@@ -1,7 +1,7 @@
 package com.storeace.controller;
 
 import com.storeace.controller.main.Attributes;
-import com.storeace.model.User;
+import com.storeace.model.Users;
 import com.storeace.model.enums.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +21,13 @@ public class RegCont extends Attributes {
 
     @PostMapping
     public String regUser(Model model, @RequestParam String username, @RequestParam String fio, @RequestParam String password, @RequestParam String passwordRepeat) {
-        if (userService.findAll().isEmpty() || userService.findAll().size() == 0){
-            userService.add(new User(username, password, fio, Role.ADMIN, defaultAvatar));
+        if (usersService.findAll().isEmpty() || usersService.findAll().size() == 0){
+            usersService.add(new Users(username, password, fio, Role.ADMIN, defaultAvatar));
             return "redirect:/login";
         }
 
 
-        if (userService.findByUsername(username) != null) {
+        if (usersService.findByUsername(username) != null) {
             model.addAttribute("message", "Пользователь с таким логином уже существует");
             AddAttributes(model);
             return "reg";
@@ -39,7 +39,7 @@ public class RegCont extends Attributes {
             return "reg";
         }
 
-        userService.add(new User(username, password, fio, Role.EMPLOYEE, defaultAvatar));
+        usersService.add(new Users(username, password, fio, Role.EMPLOYEE, defaultAvatar));
 
         return "redirect:/login";
     }

@@ -188,7 +188,7 @@ public class Attributes extends Main {
     protected void AddAttributesProfiles(Model model) {
         AddAttributes(model);
         model.addAttribute("roles", Role.values());
-        model.addAttribute("users", userService.findAllByOrderByRole());
+        model.addAttribute("users", usersService.findAllByOrderByRole());
     }
 
     protected void AddAttributesAddUser(Model model) {
