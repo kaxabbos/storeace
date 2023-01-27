@@ -26,7 +26,6 @@ public class RegCont extends Attributes {
             return "redirect:/login";
         }
 
-
         if (usersService.findByUsername(username) != null) {
             model.addAttribute("message", "Пользователь с таким логином уже существует");
             AddAttributes(model);

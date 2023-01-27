@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Attributes extends Main {
 
@@ -123,23 +124,26 @@ public class Attributes extends Main {
         model.addAttribute("selectedDate", date);
         model.addAttribute("statuses", OrderingStatus.values());
     }
+
     protected void AddAttributesStatCycleAccepted(Model model) {
         AddAttributes(model);
         model.addAttribute("cycles", cycleService.findAll());
         model.addAttribute("simpleDateFormat", simpleDateFormat);
     }
+
     protected void AddAttributesStatCycleReserved(Model model) {
         AddAttributes(model);
         model.addAttribute("cycles", cycleService.findAllByReservedIsNotNull());
         model.addAttribute("simpleDateFormat", simpleDateFormat);
     }
+
     protected void AddAttributesStatCycleShipment(Model model) {
         AddAttributes(model);
         model.addAttribute("cycles", cycleService.findAllByShipmentIsNotNull());
         model.addAttribute("simpleDateFormat", simpleDateFormat);
     }
 
-    protected void  AddAttributesStat(Model model) {
+    protected void AddAttributesStat(Model model) {
         AddAttributes(model);
         List<Integer> status = new ArrayList<>();
         int[] price = new int[OrderingStatus.values().length];
@@ -172,11 +176,10 @@ public class Attributes extends Main {
     protected void AddAttributesProducts(Model model) {
         AddAttributes(model);
         List<Product> products = productService.findAllByOrderByIdDesc();
-        int quantity = 0;
-        for (Product i : products) {
-            quantity += i.getQuantity();
-        }
-        model.addAttribute("quantity", quantity);
+        AtomicInteger quantity = new AtomicInteger(0);
+        products.forEach(product -> quantity.addAndGet(product.getQuantity()));
+
+        model.addAttribute("quantity", quantity.get());
         model.addAttribute("products", products);
     }
 

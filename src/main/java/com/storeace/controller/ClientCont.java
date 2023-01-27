@@ -38,9 +38,7 @@ public class ClientCont extends Attributes {
     public String ClientDelete(@PathVariable Long id) {
         Client client = clientService.find(id);
         List<Ordering> orderingList = client.getOrderings();
-        for (Ordering i : orderingList) {
-            DeleteOrderingAndOrderingDetailsAndStatProduct(i.getId());
-        }
+        orderingList.forEach(ordering -> DeleteOrderingAndOrderingDetailsAndStatProduct(ordering.getId()));
         clientService.delete(client);
         return "redirect:/client";
     }

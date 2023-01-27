@@ -37,6 +37,4 @@ public class UserAllCont extends Attributes {
 
         return "redirect:/userAll";
     }
-
-
 }
