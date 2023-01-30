@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Attributes extends Main {
 
@@ -35,8 +34,7 @@ public class Attributes extends Main {
         model.addAttribute("orderingDetails", orderingService.find(idOrdering).getDetails());
         model.addAttribute("ordering", orderingService.find(idOrdering));
         List<Product> temp = productService.findAllByOrderByName();
-        List<Product> products = new ArrayList<>();
-        for (Product i : temp) if (i.getQuantity() != 0) products.add(i);
+        List<Product> products = temp.stream().filter(product -> product.getQuantity() != 0).toList();
         model.addAttribute("products", products);
     }
 
@@ -176,10 +174,8 @@ public class Attributes extends Main {
     protected void AddAttributesProducts(Model model) {
         AddAttributes(model);
         List<Product> products = productService.findAllByOrderByIdDesc();
-        AtomicInteger quantity = new AtomicInteger(0);
-        products.forEach(product -> quantity.addAndGet(product.getQuantity()));
-
-        model.addAttribute("quantity", quantity.get());
+        int quantity = products.stream().reduce(0, ((integer, product) -> integer + product.getQuantity()), Integer::sum);
+        model.addAttribute("quantity", quantity);
         model.addAttribute("products", products);
     }
 

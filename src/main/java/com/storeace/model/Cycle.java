@@ -41,19 +41,16 @@ public class Cycle {
 
     public void CalculationAcceptedTime() {
         this.reserved = new Date();
-        long calculation = Math.abs(this.reserved.getTime() - this.accepted.getTime()) / 86400000;
-        this.acceptedTime = (int) calculation;
+        this.acceptedTime = (int) Math.abs(this.reserved.getTime() - this.accepted.getTime()) / 86400000;
     }
 
     public void CalculationReservedTime() {
         this.shipment = new Date();
-        long calculation = Math.abs(this.shipment.getTime() - this.reserved.getTime()) / 86400000;
-        this.reservedTime = (int) calculation;
+        this.reservedTime = (int) Math.abs(this.shipment.getTime() - this.reserved.getTime()) / 86400000;
     }
 
     public void CalculationShipmentTime() {
         this.shipped = new Date();
-        long calculation = Math.abs(this.shipped.getTime() - this.shipment.getTime()) / 86400000;
-        this.shipmentTime = (int) calculation;
+        this.shipmentTime = (int) Math.abs(this.shipped.getTime() - this.shipment.getTime()) / 86400000;
     }
 }

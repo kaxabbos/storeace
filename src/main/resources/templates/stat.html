@@ -7,6 +7,7 @@
 
 <head th:insert="blocks\head :: head"></head>
 
+
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 accent"
@@ -71,7 +72,8 @@
                     </tr>
                     <tr>
                         <td id="productStatus0" th:text="${productStatus[1]}"></td>
-                        <td id="productStatus1" th:text="${productStatus[1] - productStatus[2] - productStatus[3]}"></td>
+                        <td id="productStatus1"
+                            th:text="${productStatus[1] - productStatus[2] - productStatus[3]}"></td>
                         <td id="productStatus2" th:text="${productStatus[2]}"></td>
                         <td id="productStatus3" th:text="${productStatus[3]}"></td>
                     </tr>

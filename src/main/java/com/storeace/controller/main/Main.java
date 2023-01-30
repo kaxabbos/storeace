@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     @Autowired
@@ -32,7 +33,6 @@ public class Main {
     protected OrderingService orderingService;
     @Autowired
     protected CycleService cycleService;
-
     @Value("${upload.img}")
     protected String uploadImg;
 
@@ -57,37 +57,39 @@ public class Main {
 
     protected void DeleteOrderingAndOrderingDetailsAndStatProduct(Long idOrder) {
         List<OrderingDetail> orderingDetailList = orderingService.find(idOrder).getDetails();
-        Product product;
-        for (OrderingDetail i : orderingDetailList) {
-            statProductService.delete(statProductService.findByIdOrderingDetail(i.getId()));
-            product = productService.find(i.getProduct().getId());
-            product.setQuantity(product.getQuantity() + i.getQuantity());
-        }
+        orderingDetailList.forEach(detail -> {
+            statProductService.delete(statProductService.findByIdOrderingDetail(detail.getId()));
+            Product product = productService.find(detail.getProduct().getId());
+            product.setQuantity(product.getQuantity() + detail.getQuantity());
+        });
         orderingService.delete(idOrder);
     }
 
     protected void getPriceAndQuantity(Model model, List<Ordering> orderingList) {
-        int price = 0, quantity = 0;
-        for (Ordering i : orderingList) {
-            price += i.getFullPrice();
-            quantity += i.getFullQuantity();
-        }
-        model.addAttribute("price", price);
-        model.addAttribute("quantity", quantity);
+        AtomicInteger price = new AtomicInteger();
+        AtomicInteger quantity = new AtomicInteger();
+        orderingList.forEach(ordering -> {
+            price.addAndGet(ordering.getFullPrice());
+            quantity.addAndGet(ordering.getFullQuantity());
+        });
+        model.addAttribute("price", price.get());
+        model.addAttribute("quantity", quantity.get());
     }
 
     protected void setFullPriceAndFullQuantity(Long idOrders) {
-        List<OrderingDetail> orderingDetailList = orderingService.find(idOrders).getDetails();
-        int fullPrice = 0, fullQuantity = 0;
-
-        for (OrderingDetail i : orderingDetailList) {
-            fullPrice += i.getPrice();
-            fullQuantity += i.getQuantity();
-        }
-
         Ordering ordering = orderingService.find(idOrders);
-        ordering.setFullPrice(fullPrice);
-        ordering.setFullQuantity(fullQuantity);
+        List<OrderingDetail> orderingDetailList = ordering.getDetails();
+
+        AtomicInteger fullPrice = new AtomicInteger();
+        AtomicInteger fullQuantity = new AtomicInteger();
+
+        orderingDetailList.forEach(detail -> {
+            fullPrice.addAndGet(detail.getPrice());
+            fullQuantity.addAndGet(detail.getQuantity());
+        });
+
+        ordering.setFullPrice(fullPrice.get());
+        ordering.setFullQuantity(fullQuantity.get());
         orderingService.update(ordering);
     }
 
