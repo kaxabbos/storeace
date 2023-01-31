@@ -28,6 +28,9 @@ public class UsersService implements UserDetailsService {
     public void add(Users users) {
         usersRepo.save(users);
     }
+    public Users addAndFlush(Users users) {
+        return usersRepo.saveAndFlush(users);
+    }
 
     public void update(Users users) {
         usersRepo.save(users);
