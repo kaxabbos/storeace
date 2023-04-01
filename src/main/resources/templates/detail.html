@@ -44,7 +44,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>Наименование и ИД продукта</strong>
+                            <strong>Наименование</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -60,7 +60,7 @@
                 </div>
                 <div th:each="detail : ${details}" class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <input th:value="${detail.product.name + ' - ' + detail.product.id}"
+                        <input th:value="${detail.product.name}"
                                class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">

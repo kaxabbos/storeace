@@ -50,7 +50,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark" for="product">
-                            <strong>Наименование, ИД, имеющееся количество и цена за единицу продукта</strong>
+                            <strong>Наименование, имеющееся количество и цена за единицу продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
@@ -64,7 +64,7 @@
                                             onmousedown="if(this.options.length>5){this.size=5;}"
                                             onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="product : ${products}" th:value="${product.id}"
-                                                th:label="${product.name} + ' - ' + ${product.id} + ' - ' + ${product.quantity}+ ' - ' + ${product.unitPrice}"></option>
+                                                th:label="${product.name} + ' - ' + ${product.quantity}+ ' - ' + ${product.unitPrice}"></option>
                                     </select>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px">

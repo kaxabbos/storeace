@@ -115,6 +115,7 @@ public class OrderingCont extends Attributes {
                 return "ordering";
             }
         }
+
         ordering.setDate(date);
         orderingService.update(ordering);
         return "redirect:/ordering";

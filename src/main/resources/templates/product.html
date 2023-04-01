@@ -67,11 +67,6 @@
                 <hr>
                 <h5 class="text-dark mb-4">Редактировать</h5>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <label class="col-form-label text-center text-dark">
-                            <strong>ИД</strong>
-                        </label>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>Наименование товара</strong>
@@ -94,9 +89,6 @@
                     <div class="col">
                         <form th:action="'/product/' + ${product.id} + '/edit'" method="post">
                             <div class="row">
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                                    <input th:value="${product.id}" class="form-control" type="text" readonly>
-                                </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                     <input th:value="${product.name}" class="form-control" type="text" name="name" required>
                                 </div>

@@ -22,11 +22,6 @@
                     </div>
                 </div>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <label class="col-form-label text-center text-dark">
-                            <strong>ИД заказа</strong>
-                        </label>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>Клиент</strong>
@@ -60,9 +55,6 @@
                     <div class="col">
                         <form th:action="'/payment/' + ${payment.getId()} + '/edit'" method="post">
                             <div class="row">
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                                    <input th:value="${payment.id}" class="form-control" type="text" readonly>
-                                </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                     <input th:value="${payment.client.fio}" class="form-control" type="text" readonly>
                                 </div>
