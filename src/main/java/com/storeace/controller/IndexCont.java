@@ -31,30 +31,19 @@ public class IndexCont extends Attributes {
         return "index";
     }
 
-    @PostMapping("/user/edit")
-    public String userEdit(Model model, @RequestParam String fio, @RequestParam String passwordOld, @RequestParam String password, @RequestParam String passwordRepeat) {
+    @PostMapping("/user/edit/fio")
+    public String userEditFio(@RequestParam String fio) {
         Users user = getUser();
-
-        if (!passwordOld.equals(user.getPassword())) {
-            model.addAttribute("message", "Некорректный ввод текущего пароля");
-            AddAttributesIndex(model);
-            return "index";
-        }
-
-        if (!password.equals("") && !passwordRepeat.equals("")) {
-            if (!password.equals(passwordRepeat)) {
-                model.addAttribute("message",
-                        "Новые пароли не совпадают");
-                AddAttributesIndex(model);
-                return "index";
-            }
-            user.setPassword(password);
-        }
-
-        if (!fio.equals("")) user.setFio(fio);
-
+        user.setFio(fio);
         usersService.update(user);
+        return "redirect:/index";
+    }
 
+    @PostMapping("/user/edit/password")
+    public String userEditPassword(@RequestParam String password) {
+        Users user = getUser();
+        user.setPassword(password);
+        usersService.update(user);
         return "redirect:/index";
     }
 

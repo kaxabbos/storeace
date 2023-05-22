@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>STOREACE - Статистика заказов</title>
+    <title>Статистика заказов</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -58,14 +58,9 @@
                 </div>
                 <hr>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <label class="col-form-label text-center text-dark">
-                            <strong>ИД заказа</strong>
-                        </label>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>ИД и ФИО клиента</strong>
+                            <strong>ФИО клиента</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -96,11 +91,8 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px"></div>
                 </div>
                 <div th:each="ordering : ${orderings}" class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <input th:value="${ordering.id}" class="form-control" type="text" readonly>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <input th:value="${ordering.client.id + ' - ' + ordering.client.fio}" class="form-control" type="text" readonly>
+                        <input th:value="${ordering.client.fio}" class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
                         <input th:value="${ordering.date}" class="form-control" type="date" name="date" readonly>

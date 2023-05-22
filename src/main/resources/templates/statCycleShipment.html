@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>STOREACE - Статистика заказов</title>
+    <title>Статистика заказов</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -27,11 +27,6 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>ИД заказа</strong>
-                        </label>
-                    </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <label class="col-form-label text-center text-dark">
                             <strong>Дата начало отгрузки</strong>
                         </label>
                     </div>
@@ -48,9 +43,6 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px"></div>
                 </div>
                 <div th:each="cycle : ${cycles}" class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <input th:value="${cycle.ordering.getId()}" class="form-control" type="text" readonly>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${simpleDateFormat.format(cycle.shipment.getTime())}" class="form-control"
                                type="text" readonly>

@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>STOREACE - Детали заказа</title>
+    <title>Детали заказа</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -78,7 +78,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>Наименование и ИД продукта</strong>
+                            <strong>Наименование продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
@@ -114,7 +114,7 @@
                                             onmousedown="if(this.options.length>5){this.size=5;}"
                                             onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="product : ${products}" th:value="${product.id}"
-                                                th:label="${product.name} + ' - ' + ${product.id}"
+                                                th:label="${product.name}"
                                                 th:selected="${product.id == orderingDetail.product.id}"></option>
                                     </select>
                                 </div>

@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>STOREACE - Открыто</title>
+    <title>Открыто</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -17,11 +17,6 @@
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Ожидание</h3>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <label class="col-form-label text-center text-dark">
-                            <strong>ИД заказа</strong>
-                        </label>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>Клиент</strong>
@@ -47,9 +42,6 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px"></div>
                 </div>
                 <div th:each="waiting : ${waitings}" class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <input th:value="${waiting.id}" class="form-control" type="text" readonly>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${waiting.client.fio}" class="form-control" type="text" readonly>
                     </div>

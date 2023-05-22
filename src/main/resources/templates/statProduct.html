@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>STOREACE - Статистика продукции</title>
+    <title>Статистика продукции</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -64,11 +64,6 @@
                 </div>
                 <hr>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <label class="col-form-label text-center text-dark">
-                            <strong>ИД товара</strong>
-                        </label>
-                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>Наименование товара</strong>
@@ -93,9 +88,6 @@
                 <div th:each="stat : ${statProducts}" class="row mb-5px">
                     <div class="col">
                         <div class="row">
-                            <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                                <input th:value="${stat.product.id}" class="form-control" type="text" readonly>
-                            </div>
                             <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                 <input th:value="${stat.product.name}" class="form-control" type="text" readonly>
                             </div>

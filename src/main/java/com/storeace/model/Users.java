@@ -39,6 +39,10 @@ public class Users implements UserDetails {
         this.avatar = avatar;
     }
 
+    public void setPassword(String password) {
+        this.password = passwordEncoder().encode(password);
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
