@@ -32,8 +32,8 @@
                             <strong>Должность</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                    <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center"></div>
+                    <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center"></div>
                 </div>
                 <div th:each="user : ${users}" class="row mb-10px">
                     <div class="col">
@@ -48,14 +48,14 @@
                                                 th:value="${role}" th:selected="${role == user.role}"></option>
                                     </select>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                                    <button class="btn btn-outline-primary btn-sm fs-16px" type="submit">
+                                <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <button class="btn btn-outline-primary btn-sm fs-16px w-100" type="submit">
                                         Изменить
                                     </button>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center">
                                     <a th:href="'/userAll/' + ${user.id} + '/delete'"
-                                       class="btn btn-outline-danger btn-sm fs-16px">Удалить</a>
+                                       class="btn btn-outline-danger btn-sm fs-16px w-100">Удалить</a>
                                 </div>
                             </div>
                         </form>

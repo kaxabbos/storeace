@@ -79,7 +79,7 @@ public class OrderingCont extends Attributes {
             }
             if (i.getQuantity() == 0) {
                 AddAttributesOrdering(model);
-                model.addAttribute("message", "Неккоректный выбор деталей заказа: " + ordering.getId() + " - " + ordering.getClient().getFio());
+                model.addAttribute("message", "Некорректный выбор деталей заказа: " + ordering.getId() + " - " + ordering.getClient().getFio());
                 return "ordering";
             }
         }

@@ -27,7 +27,7 @@
                             <strong>Дата</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-75px"></div>
+                    <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center"></div>
                 </div>
                 <form action="/statOrdering/search" method="post" class="mb-20px">
                     <div class="row">
@@ -42,8 +42,8 @@
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                             <input th:value="${selectedDate}" class="form-control" type="date" id="date" name="date">
                         </div>
-                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-75px">
-                            <button class="btn btn-outline-primary btn-sm fs-16px" type="submit">Поиск</button>
+                        <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <button class="btn btn-outline-primary btn-sm fs-16px w-100" type="submit">Поиск</button>
                         </div>
                     </div>
                 </form>
@@ -63,7 +63,7 @@
                             <strong>ФИО клиента</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>Дата</strong>
                         </label>
@@ -88,13 +88,13 @@
                             <strong>Состояние</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px"></div>
+                    <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center "></div>
                 </div>
                 <div th:each="ordering : ${orderings}" class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${ordering.client.fio}" class="form-control" type="text" readonly>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${ordering.date}" class="form-control" type="date" name="date" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
@@ -110,9 +110,9 @@
                         <input th:value="${ordering.orderingStatus.getName()}" class="form-control" type="text"
                                readonly>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px">
+                    <div class="col-1 d-lg-flex justify-content-lg-center align-items-lg-center">
                         <a th:href="'/ordering/' + ${ordering.id} + '/detail'"
-                           class="btn btn-outline-primary btn-sm fs-16px" type="submit">
+                           class="btn btn-outline-primary btn-sm fs-16px w-100" type="submit">
                             Детали
                         </a>
                     </div>

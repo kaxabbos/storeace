@@ -23,7 +23,7 @@
                 </div>
                 <form action="/userAdd/add" method="post">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="mb-3">
                                 <label class="form-label text-dark" for="username">
                                     <strong>Логин</strong>
@@ -32,7 +32,7 @@
                                        name="username" required>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="mb-3">
                                 <label class="form-label text-dark"
                                        for="password">
@@ -42,9 +42,7 @@
                                        name="password" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="mb-3">
                                 <label class="form-label text-dark" for="fio">
                                     <strong>ФИО</strong>
@@ -52,13 +50,13 @@
                                 <input class="form-control" type="text" name="fio" id="fio" placeholder="ФИО" required>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="mb-3">
                                 <label class="form-label text-dark" for="role">
                                     <strong>Должность</strong>
                                 </label>
                                 <select class="form-select" name="role" id="role">
-                                    <option th:each="role : ${roles}" th:label="${role.getName()}" th:value="${role}"></option>
+                                    <option th:each="role : ${roles}" th:label="${role.name}" th:value="${role}"></option>
                                 </select>
                             </div>
                         </div>

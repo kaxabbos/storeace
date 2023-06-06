@@ -18,6 +18,10 @@ public class Attributes extends Main {
         model.addAttribute("role", getRole());
         model.addAttribute("user", getUser());
     }
+    protected void AddAttributesEnums(Model model) {
+        model.addAttribute("orderingStatuses", OrderingStatus.values());
+        model.addAttribute("productStatuses", ProductStatus.values());
+    }
 
     protected void AddAttributesDetails(Model model, Long idOrdering) {
         AddAttributes(model);
@@ -143,6 +147,7 @@ public class Attributes extends Main {
 
     protected void AddAttributesStat(Model model) {
         AddAttributes(model);
+        AddAttributesEnums(model);
         List<Integer> status = new ArrayList<>();
         int[] price = new int[OrderingStatus.values().length];
         List<OrderingStatus> list1 = List.of(OrderingStatus.values());

@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/userAll")
-public class UserAllCont extends Attributes {
+public class UsersCont extends Attributes {
 
     @GetMapping
     public String Profiles(Model model) {
         AddAttributesProfiles(model);
-        return "userAll";
+        return "users";
     }
 
     @PostMapping("/{id}/edit")
@@ -30,7 +30,7 @@ public class UserAllCont extends Attributes {
         if (getUser().getId() == id) {
             AddAttributesProfiles(model);
             model.addAttribute("message", "Вы не можете удалить свой профиль");
-            return "userAll";
+            return "users";
         }
 
         usersService.delete(id);

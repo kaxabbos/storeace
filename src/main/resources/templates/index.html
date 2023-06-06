@@ -22,22 +22,30 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-lg-4">
+                    <div class="col-4">
                         <div class="card mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-dark m-0 fw-bold">Настройка фотографии</p>
+                            </div>
                             <div class="card-body text-center shadow">
                                 <img th:src="'/img/' + ${user.avatar}" class="rounded-circle border mb-3 mt-4"
-                                     height="160" width="160">
-                                <div class="mb-3">
-                                    <form action="/user/edit/avatar" method="post" enctype="multipart/form-data">
-                                        <input class="form-control" type="file" name="avatar" required
-                                               accept="image/*">
-                                        <button class="btn btn-outline-primary mt-10px" type="submit">Изменить</button>
-                                    </form>
-                                </div>
+                                     height="200" width="200">
+                                <form action="/user/edit/avatar" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-control" type="file" name="avatar" required
+                                                   accept="image/*">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-primary" type="submit">Изменить
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-8">
                         <div class="row">
                             <div class="col">
                                 <div class="card shadow mb-3">
@@ -64,7 +72,8 @@
                                             <div class="row mb-10px">
                                                 <div class="col">
                                                     <input class="form-control" type="password" id="password"
-                                                           name="password" placeholder="Введите новый пароль..." required>
+                                                           name="password" placeholder="Введите новый пароль..."
+                                                           required>
                                                 </div>
                                                 <div class="col-auto">
                                                     <button class="btn btn-outline-primary" type="submit">
