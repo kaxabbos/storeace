@@ -18,6 +18,7 @@ public class Attributes extends Main {
         model.addAttribute("role", getRole());
         model.addAttribute("user", getUser());
     }
+
     protected void AddAttributesEnums(Model model) {
         model.addAttribute("orderingStatuses", OrderingStatus.values());
         model.addAttribute("productStatuses", ProductStatus.values());
@@ -96,9 +97,12 @@ public class Attributes extends Main {
 
         int max = 0;
         for (StatProduct i : statProducts) {
-            if (i.getProductStatus() == ProductStatus.PRODUCED) max += i.getQuantity();
-            if (i.getProductStatus() == ProductStatus.SHIPPED || i.getProductStatus() == ProductStatus.RESERVED)
+            if (i.getProductStatus() == ProductStatus.PRODUCED) {
+                max += i.getQuantity();
+            }
+            if (i.getProductStatus() == ProductStatus.SHIPPED || i.getProductStatus() == ProductStatus.RESERVED) {
                 max -= i.getQuantity();
+            }
         }
 
         model.addAttribute("selectedStatus", productStatus);

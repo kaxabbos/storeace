@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/reg", "/img/**", "/css/**", "/fonts/**", "/js/**", "/stat/status", "/stat/price", "/stat/product").permitAll()
+                .antMatchers("/reg", "/img/**", "/css/**", "/fonts/**", "/js/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")

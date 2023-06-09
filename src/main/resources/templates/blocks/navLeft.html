@@ -92,11 +92,10 @@
                     <i class="far fa-star icons"></i><span>О нас</span>
                 </a>
             </li>
-            <li th:if="${role != 'NOT'}" class="nav-item">
-                <form class="nav-link" action="/logout" method="post">
-                    <i class="icon-logout icons"></i>
-                    <button class="btn button-logout" type="submit">Выход</button>
-                </form>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                    <i class="icon-logout icons"></i><span>Выход</span>
+                </a>
             </li>
         </ul>
     </div>
