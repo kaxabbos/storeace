@@ -9,8 +9,7 @@ import com.storeace.model.enums.ProductStatus;
 import com.storeace.model.enums.Role;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Attributes extends Main {
 
@@ -85,11 +84,11 @@ public class Attributes extends Main {
 
         List<StatProduct> statProducts;
 
-        if (productStatus == ProductStatus.ALL && (date == null || date.equals(""))) {
+        if (productStatus == ProductStatus.ALL && (date == null || date.isEmpty())) {
             statProducts = statProductService.findAllByOrderByIdDesc();
         } else if (productStatus == ProductStatus.ALL) {
             statProducts = statProductService.findAllByDateOrderByIdDesc(date);
-        } else if (date == null || date.equals("")) {
+        } else if (date == null || date.isEmpty()) {
             statProducts = statProductService.findAllByProductStatusOrderByIdDesc(productStatus);
         } else {
             statProducts = statProductService.findAllByProductStatusAndDateOrderByIdDesc(productStatus, date);
@@ -115,11 +114,11 @@ public class Attributes extends Main {
     protected void AddAttributesStatOrdering(Model model, OrderingStatus orderingStatus, String date) {
         AddAttributes(model);
         List<Ordering> orderingList;
-        if (orderingStatus == OrderingStatus.ALL && (date == null || date.equals(""))) {
+        if (orderingStatus == OrderingStatus.ALL && (date == null || date.isEmpty())) {
             orderingList = orderingService.findAllByOrderByIdDesc();
         } else if (orderingStatus == OrderingStatus.ALL) {
             orderingList = orderingService.findAllByDateOrderByIdDesc(date);
-        } else if (date == null || date.equals("")) {
+        } else if (date == null || date.isEmpty()) {
             orderingList = orderingService.findAllByOrderingStatusOrderByIdDesc(orderingStatus);
         } else {
             orderingList = orderingService.findAllByOrderingStatusAndDateOrderByIdDesc(orderingStatus, date);
@@ -147,37 +146,6 @@ public class Attributes extends Main {
         AddAttributes(model);
         model.addAttribute("cycles", cycleService.findAllByShipmentIsNotNull());
         model.addAttribute("simpleDateFormat", simpleDateFormat);
-    }
-
-    protected void AddAttributesStat(Model model) {
-        AddAttributes(model);
-        AddAttributesEnums(model);
-        List<Integer> status = new ArrayList<>();
-        int[] price = new int[OrderingStatus.values().length];
-        List<OrderingStatus> list1 = List.of(OrderingStatus.values());
-        for (int i = 0; i < list1.size(); i++) {
-            int temp = orderingService.countByOrderingStatus(list1.get(i));
-            status.add(temp);
-            status.set(0, status.get(0) + temp);
-            List<Ordering> orderingList = orderingService.findAllByOrderingStatus(list1.get(i));
-            for (Ordering j : orderingList) {
-                price[0] += j.getFullPrice();
-                price[i] += j.getFullPrice();
-            }
-        }
-        model.addAttribute("orderingStatus", status);
-        model.addAttribute("orderingPrice", price);
-
-        int[] product = new int[ProductStatus.values().length];
-        List<ProductStatus> list2 = List.of(ProductStatus.values());
-        for (int i = 0; i < list2.size(); i++) {
-            List<StatProduct> productsList = statProductService.findAllByProductStatus(list2.get(i));
-            for (StatProduct j : productsList) {
-                product[0] += j.getQuantity();
-                product[i] += j.getQuantity();
-            }
-        }
-        model.addAttribute("productStatus", product);
     }
 
     protected void AddAttributesProducts(Model model) {
